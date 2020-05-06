@@ -3,38 +3,39 @@ import SwiftUI
 import PlaygroundSupport
 
 // Class Person
-final class Person {
+final class Person: ObservableObject {
     
     // Variables that will be notified every time they changes
-    var name: String = ""
-    var surname: String = ""
-    
-    init(name: String, surname: String) {
-        self.name = name
-        self.surname = surname
-    }
-}
-
-final class PeopleViewModel: ObservableObject {
-    
-    @Published var people = [Person]()
+    @Published var name: String = ""
+    @Published var surname: String = ""
+    // A set to store subscriptions
     var subscriptions = Set<AnyCancellable>()
     
-    init(){
-        $people
-            .sink (receiveValue: {
-                guard let last = $0.last else {return}
-                print("Last recieved: \(String(describing: last.name)) \(String(describing: last.surname))")
+    init(_ name: String, _ surname: String) {
+        self.name = name
+        self.surname = surname
+        
+        // Subscriptions to published variables
+        $name
+            .removeDuplicates()
+            .sink(receiveValue: {
+                print("New name: \($0)")
             })
             .store(in: &subscriptions)
+        
+        $surname
+            .removeDuplicates()
+            .sink {
+                print("New surname: \($0)")
+            }
+            .store(in: &subscriptions)
     }
-    
 }
 
 struct ContentView: View {
     
     // Variables
-    @ObservedObject var peopleModel: PeopleViewModel = PeopleViewModel()
+    @ObservedObject var person: Person
     @State var name: String = ""
     @State var surname: String = ""
     
@@ -42,7 +43,7 @@ struct ContentView: View {
     // View body
     var body: some View {
         VStack(alignment: .center, spacing: 25){
-            Text("Hello, enter a contact")
+            Text("Hello, \(person.name) \(person.surname)")
                 .padding(.bottom, 50)
             HStack(alignment: .center, spacing: 2){
                 VStack{
@@ -69,13 +70,14 @@ struct ContentView: View {
             }
             // Triggers the publisher
             Button(action: {
-                self.peopleModel.people.append(Person(name: self.name, surname: self.surname))
+                self.person.name = self.name
+                self.person.surname = self.surname
             }) {
                 Text("Update")
             }
             // Once this button is pressed, publisher won't work anymore
             Button(action: {
-                self.peopleModel.subscriptions.removeAll()
+                self.person.subscriptions.removeAll()
             }) {
                 Text("Cancel subscriptions")
             }
@@ -84,4 +86,4 @@ struct ContentView: View {
 }
 
 // To display the view in playground
-PlaygroundPage.current.setLiveView(ContentView())
+PlaygroundPage.current.setLiveView(ContentView(person: Person("Mario", "Rossi")))
