@@ -10,8 +10,7 @@ let anotherQueue = DispatchQueue(label: "serial again")
 //To see in what thread we are:
 print("Now we are in thread \(Thread.current)")
 let s = [1, 2, 3, 4, 5].publisher
-    //.subscribe(on: aQueue)
-    //.print(Thread.current.description)
+    .subscribe(on: aQueue)
     .sink(receiveValue: {
         print("Recieved \($0) on thread \(Thread.current)")
     })
