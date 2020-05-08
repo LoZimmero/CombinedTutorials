@@ -2,6 +2,10 @@
 
 This repository contains examples of usages of Combine framework relatet to a serie of Medium articles:
 
+## Combine Introduction
+This article is an introduction to the new exiciting framework.
+You can find the article here: https://medium.com/@combinedtutorials/combine-introduction-9d9a62afa34d
+
 ## Combine and SwiftUI
 This article is about usign Combine with SwiftUI to take advantage of its potential.
 You can find the article here:  https://medium.com/@combinedtutorials/combine-and-swiftui-9888f7b111bf
