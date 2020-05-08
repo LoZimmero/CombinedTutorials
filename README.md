@@ -6,6 +6,10 @@ This repository contains examples of usages of Combine framework relatet to a se
 This article is an introduction to the new exiciting framework.
 You can find the article here: https://medium.com/@combinedtutorials/combine-introduction-9d9a62afa34d
 
+## Operators First Practical Project
+This article goes in deep with operators in Combine
+You can find the article here: https://medium.com/@combinedtutorials/operators-b8405cb9e265
+
 ## Combine and SwiftUI
 This article is about usign Combine with SwiftUI to take advantage of its potential.
 You can find the article here:  https://medium.com/@combinedtutorials/combine-and-swiftui-9888f7b111bf
