@@ -6,7 +6,7 @@ This repository contains examples of usages of Combine framework relatet to a se
 This article is an introduction to the new exiciting framework.
 You can find the article here: https://medium.com/@combinedtutorials/combine-introduction-9d9a62afa34d
 
-## Operators First Practical Project
+## Combine's Operators
 This article goes in deep with operators in Combine
 You can find the article here: https://medium.com/@combinedtutorials/operators-b8405cb9e265
 
